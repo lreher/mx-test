@@ -1,4 +1,12 @@
+import Vue from 'vue';
+
+window.Vue = Vue;
+
 require('./bootstrap');
 
+Vue.component('app-component', require('./components/App.vue').default);
 
-console.log('hi')
+// kick off vue instance
+new Vue({
+  el: '#app',
+});

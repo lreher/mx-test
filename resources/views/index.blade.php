@@ -6,10 +6,18 @@
 
         <title>MX Testo</title>
 
-        <script src="/js/app.js"></script>
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
+        <script defer src="{{ mix('js/app.js') }}"></script>
     </head>
 
     <body>
+        <div id='app'>
+
+            <app-component></app-component>
+        
+        </div>
+
 
     </body>
+
 </html>
