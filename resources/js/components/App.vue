@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ test }}</h1>
+    <h1>Hello {{ person }}</h1>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   data: function () {
     return {
-        test: "Hello friend"
+        person: "Kat"
     }
   }
 }
@@ -16,6 +16,6 @@ export default {
 
 <style>
 h1 {
-  color: red;
+  color: blue;
 }
 </style>
