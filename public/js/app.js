@@ -1947,14 +1947,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     console.log(this.csrf);
   },
+  methods: {
+    showPassword: function showPassword(event) {
+      if (event.target.checked) {
+        document.getElementById('passwordInput').type = 'text';
+        document.getElementById('confirmPasswordInput').type = 'text';
+      } else {
+        document.getElementById('passwordInput').type = 'password';
+        document.getElementById('confirmPasswordInput').type = 'password';
+      }
+    }
+  },
   data: function data() {
-    return {
-      showPassword: false
-    };
+    return {};
   },
   props: ['csrf']
 });
@@ -2967,17 +2979,38 @@ var render = function() {
         _vm._v(" "),
         _c("label", { attrs: { for: "password" } }, [_vm._v("Password:")]),
         _vm._v(" "),
-        _c("input", { attrs: { type: "text", name: "password" } }),
+        _c("input", {
+          attrs: { id: "passwordInput", type: "password", name: "password" }
+        }),
         _c("br"),
         _c("br"),
         _vm._v(" "),
         _c("label", { attrs: { for: "confirm_password" } }, [
-          _vm._v("Confirm Passowrd:")
+          _vm._v("Confirm Password:")
         ]),
         _vm._v(" "),
-        _c("input", { attrs: { type: "text", name: "confirm_password" } }),
+        _c("input", {
+          attrs: {
+            id: "confirmPasswordInput",
+            type: "password",
+            name: "confirm_password"
+          }
+        }),
         _c("br"),
         _c("br"),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "showPassword" } }, [
+          _vm._v("Show password?")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "showPassword" },
+          on: {
+            change: function($event) {
+              return _vm.showPassword($event)
+            }
+          }
+        }),
         _vm._v(" "),
         _c("button", { attrs: { type: "submit" } }, [_vm._v("Register")])
       ]

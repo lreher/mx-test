@@ -16,9 +16,38 @@ class RegistrationRequest extends BaseFormRequest
     public function rules()
     {
         $rules = [
+            'username' => [
+                'required'
+            ],
+            'email' => [
+                'required',
+                'email',
+                'unique:users'
+            ],
+            'password' => [
+                'required',
+                'confirmed',
+                'min:6',
+                'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$/' // must contain at least one lowercase letter, at least one uppercase letter and at least one digit
+            ],
+
         ];
 
         return $rules;
+    }
+
+    public function messages()
+    {
+        return [
+            'username.required' => "You must enter an username",
+            'email.required' => "You must enter an email address",
+            'email.email' => "Email address must be valid",
+            'email.unique' => "This email address is already being used",
+            'password.required' => "You must enter a password",
+            'password.confirmed' => "Your passwords are not matching",
+            'password.min' => "Password must be at least 6 characters long",
+            'password.regex' => "Password must contain at least one lowercase letter, at least one uppercase letter and at least one digit"
+        ];
     }
 
 }

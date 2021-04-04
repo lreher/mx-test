@@ -14,10 +14,13 @@
             <input type="text" name="email"><br><br>
 
             <label for="password">Password:</label>
-            <input type="text" name="password"><br><br>
+            <input id="passwordInput" type="password" name="password"><br><br>
 
-            <label for="confirm_password">Confirm Passowrd:</label>
-            <input type="text" name="confirm_password"><br><br>
+            <label for="confirm_password">Confirm Password:</label>
+            <input id="confirmPasswordInput" type="password" name="confirm_password"><br><br>
+
+            <label for="showPassword">Show password?</label>
+            <input type="checkbox" name="showPassword" @change="showPassword($event)">
 
             <button type="submit">Register</button>
         </form>
@@ -34,9 +37,19 @@ export default {
     mounted: function() {
         console.log(this.csrf);
     },
+    methods: {
+        showPassword: function(event) {
+            if(event.target.checked) {
+                document.getElementById('passwordInput').type='text';
+                document.getElementById('confirmPasswordInput').type='text';
+            } else {
+                document.getElementById('passwordInput').type='password';
+                document.getElementById('confirmPasswordInput').type='password';
+            }
+        }
+    },
     data: function () {
         return {
-            showPassword: false
         }
     },
     props: ['csrf']
