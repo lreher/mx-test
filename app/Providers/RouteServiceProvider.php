@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
+
+    /**
+     * The directory where controller references will look at
+     *
+     * @var string
+     */
+    protected $namespace = 'App\Http\Controllers';
+
     /**
      * The path to the "home" route for your application.
      *
