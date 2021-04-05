@@ -48,9 +48,10 @@ class LoginController extends Controller
 
         if (!Auth::check()) {
 
+            session()->flash('error', 'Your credentials are incorrect'); 
+
             return redirect()
-                ->back()
-                ->withErrors(['Your credentials are incorrect.']);
+                ->back();
         }
 
         return redirect()->route('home');
@@ -63,6 +64,8 @@ class LoginController extends Controller
      */
     public function logout(Request $request) {
         Auth::logout();
+
+        session()->flash('message', 'You have successfully logged out.'); 
 
         return redirect()->route('login');
 

@@ -12,21 +12,27 @@
                     <div class="form-group">
                         <label for="username">Username:</label>
                         <input type="text" class="form-control" name="username" placeholder="Select a username">
+
+                        <small class="form-text text-danger">{{ getError('username') }}</small>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input type="text" class="form-control" name="email" placeholder="Select an email">
+
+                        <small class="form-text text-danger">{{ getError('email') }}</small>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password:</label>
-                        <input id="passwordInput" type="passowrd" class="form-control" name="password" placeholder="Choose a password">
+                        <input id="passwordInput" type="password" class="form-control" name="password" placeholder="Choose a password">
+                    
+                        <small class="form-text text-danger">{{ getError('password') }}</small>
                     </div>
 
                     <div class="form-group">
                         <label for="confirm_password">Confirm Password:</label>
-                        <input id="confirmPasswordInput" type="passowrd" class="form-control" name="password_confirmation" placeholder="Confirm password">
+                        <input id="confirmPasswordInput" type="password" class="form-control" name="password_confirmation" placeholder="Confirm password">
                     </div>
 
                       <div class="form-group">
@@ -48,7 +54,7 @@
 <script>
 export default {
     mounted: function() {
-        console.log(this.csrf);
+        this.errors = JSON.parse(this.validation_errors);
     },
     methods: {
         showPassword: function(event) {
@@ -59,19 +65,27 @@ export default {
                 document.getElementById('passwordInput').type='password';
                 document.getElementById('confirmPasswordInput').type='password';
             }
+        },
+        getError: function(field) {
+            if (this.errors[field]) {
+                return this.errors[field][0];
+            } else {
+                return "";
+            }
         }
     },
     data: function () {
         return {
+            errors: {},
         }
     },
-    props: ['csrf']
+    props: ['csrf', 'validation_errors']
 }
 </script>
 
 <style>
 #registrationBox {
-    height: 100vh;
+    height: 90vh;
 }
 
 .card-header {

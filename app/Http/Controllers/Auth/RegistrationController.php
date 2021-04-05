@@ -62,7 +62,6 @@ class RegistrationController extends Controller
             return redirect()
                 ->back()
                 ->withErrors(['Something went wrong creating your account.']);
-
         }
     }
 }
