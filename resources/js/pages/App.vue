@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main">
         <div>
             <h1>Hello {{ user.username }}</h1>
         </div>
@@ -26,8 +26,10 @@ export default {
 }
 </script>
 
-<style scoped=true>
-h1 {
-    color: grey;
+<style>
+body {
+    background-color: rgb(94 132 154 / 33%);
+    width: 100vw;
+    height: 100vh;
 }
 </style>
