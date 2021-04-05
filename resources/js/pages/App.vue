@@ -1,11 +1,16 @@
 <template>
-    <div class="main">
-        <div>
-            <h1>Hello {{ user.username }}</h1>
-        </div>
+    <div>
+        <app-header :username="user.username"></app-header>
 
-        <div>
-            <a href="/logout">Logout</a>
+
+        <div class="row m-2 d-flex justify-content-center">
+            <div class="col-6">
+                <app-user-details :user_model="user_model"></app-user-details>  
+            </div>
+
+             <div class="col-6">
+                <app-user-addresses :addresses="[]"></app-user-addresses>  
+            </div>
         </div>
     </div>
 </template>
@@ -26,10 +31,5 @@ export default {
 }
 </script>
 
-<style>
-body {
-    background-color: rgb(94 132 154 / 33%);
-    width: 100vw;
-    height: 100vh;
-}
+<style scoped=true>
 </style>

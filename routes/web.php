@@ -12,4 +12,7 @@ Route::post('register', 'Auth\RegistrationController@register')->name('register.
 
 Route::middleware([ 'auth' ])->group(function() {
     Route::get('/', 'HomeController@showHome')->name('home');
+
+    // User s
+    Route::post('/user_details', 'HomeController@saveUserDetails')->name('user_details.do');
 });

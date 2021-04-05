@@ -12,8 +12,14 @@ Vue.component('app', require('./pages/App.vue').default);
 Vue.component('login', require('./pages/Login.vue').default);
 Vue.component('register', require('./pages/Register.vue').default);
 
-// Register Components
+// Helper Components
 Vue.component('flash-notice', require('./components/FlashNotice.vue').default);
+
+// App Components
+Vue.component('app-header', require('./components/app/AppHeader.vue').default);
+Vue.component('app-user-details', require('./components/app/UserDetails.vue').default);
+Vue.component('app-user-addresses', require('./components/app/UserAddresses.vue').default);
+
 
 // kick off vue instance
 new Vue({

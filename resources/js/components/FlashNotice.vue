@@ -29,6 +29,11 @@ export default {
     -o-animation-fill-mode: forwards;
     -moz-animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
+
+    position: fixed;
+    bottom:0;
+    right:0;
+    left: 0;
 }
 
 @keyframes fadeInAndOut {
