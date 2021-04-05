@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-dark">
-        <a class="navbar-brand color-light">Fancy Address Making Application</a>
+        <a class="navbar-brand color-light">Fantastic Address Making Application</a>
 
         <form class="form-inline">
             {{ username }}<a class="btn btn-outline" href="/logout">Logout</a>

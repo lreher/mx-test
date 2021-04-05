@@ -83,7 +83,13 @@ class HomeController extends Controller
     {
         DB::beginTransaction();
 
-        $user_address = new UserAddress();
+        if ($request->address_id) {
+            $user_address = UserAddress::find($request->address_id);
+
+        } else {
+            $user_address = new UserAddress();
+        }
+        
 
         $user_address->user_id = $this->user->id;
 
@@ -103,7 +109,7 @@ class HomeController extends Controller
             $user = User::where('id', $this->user->id)->with('userAddresses')->first();
 
             return response()->json([
-                "message" => "Successfully saved new address!",
+                "message" => "Successfully saved address!",
                 "user" => $user
             ], 200);
 
@@ -111,7 +117,7 @@ class HomeController extends Controller
 
             DB::rollback();
 
-            return response("Fail to save address", 400)
+            return response("Failed to save address", 400)
                   ->header('Content-Type', 'text/plain');
         }
     }
@@ -136,7 +142,7 @@ class HomeController extends Controller
             $user = User::where('id', $this->user->id)->with('userAddresses')->first();
 
             return response()->json([
-                "message" => "Successfully deleted address",
+                "message" => "Successfully deleted address!",
                 "user" => $user
             ], 200);
 
@@ -144,7 +150,7 @@ class HomeController extends Controller
 
             DB::rollback();
 
-            return response("Fail to delete address", 400)
+            return response("Failed to delete address", 400)
                   ->header('Content-Type', 'text/plain');
         }
     }

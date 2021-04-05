@@ -1980,13 +1980,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     this.addresses = this.addresses_prop;
   },
   methods: {
     newAddress: function newAddress() {
-      this.showNewAddress = true;
+      if (!this.showNewAddress) {
+        this.showNewAddress = true;
+      } else {
+        this.showNewAddress = false;
+      }
+
+      document.getElementById('addressIdInput').value = null;
+      document.getElementById('address1Input').value = null;
+      document.getElementById('address2Input').value = null;
+      document.getElementById('suburbInput').value = null;
+      document.getElementById('stateInput').value = null;
+      document.getElementById('postcodeInput').value = null;
+      document.getElementById('countryInput').value = null;
     },
     closeNewAddress: function closeNewAddress() {
       this.showNewAddress = false;
@@ -1994,6 +2011,7 @@ __webpack_require__.r(__webpack_exports__);
     saveAddress: function saveAddress() {
       var _this = this;
 
+      var address_id = document.getElementById('addressIdInput').value;
       var address_1 = document.getElementById('address1Input').value;
       var address_2 = document.getElementById('address2Input').value;
       var suburb = document.getElementById('suburbInput').value;
@@ -2002,6 +2020,7 @@ __webpack_require__.r(__webpack_exports__);
       var country = document.getElementById('countryInput').value;
       this.loading = true;
       axios.post('/address', {
+        address_id: address_id ? address_id : null,
         address_1: address_1 ? address_1 : null,
         address_2: address_2 ? address_2 : null,
         suburb: suburb ? suburb : null,
@@ -2029,7 +2048,7 @@ __webpack_require__.r(__webpack_exports__);
         if (error.response.status === 422) {
           _this.errors = Object.assign(_this.errors, error.response.data.errors);
 
-          _this.flashMessage("Your details have validation errors", 'danger');
+          _this.flashMessage("Your address has validation errors", 'danger');
         } // If our saving failed
 
 
@@ -2053,7 +2072,20 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     editAddress: function editAddress(id) {
-      console.log(id);
+      var _this3 = this;
+
+      this.addresses.map(function (address) {
+        if (address.id === id) {
+          document.getElementById('addressIdInput').value = id;
+          document.getElementById('address1Input').value = address.address_1;
+          document.getElementById('address2Input').value = address.address_2;
+          document.getElementById('suburbInput').value = address.suburb;
+          document.getElementById('stateInput').value = address.state;
+          document.getElementById('postcodeInput').value = address.postcode;
+          document.getElementById('countryInput').value = address.country;
+          _this3.showNewAddress = true;
+        }
+      });
     },
     flashMessage: function flashMessage(message, type) {
       this.flash.key += 1;
@@ -3928,7 +3960,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("nav", { staticClass: "navbar navbar-dark" }, [
     _c("a", { staticClass: "navbar-brand color-light" }, [
-      _vm._v("Fancy Address Making Application")
+      _vm._v("Fantastic Address Making Application")
     ]),
     _vm._v(" "),
     _c("form", { staticClass: "form-inline" }, [
@@ -3967,7 +3999,7 @@ var render = function() {
     { staticClass: "card" },
     [
       _c("div", { staticClass: "card-header" }, [
-        _vm._v("\n        Your addresses\n    ")
+        _vm._v("\n        Your Addresses\n    ")
       ]),
       _vm._v(" "),
       _c(
@@ -4043,142 +4075,158 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      _vm.showNewAddress
-        ? _c("div", { staticClass: "card-footer" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "address_1" } }, [
-                _vm._v("Address Line 1")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { id: "address1Input", type: "text", name: "address_1" }
-              }),
-              _vm._v(" "),
-              _c("small", { staticClass: "form-text text-danger" }, [
-                _vm._v(_vm._s(_vm.errors.address_1[0]))
-              ])
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.showNewAddress,
+              expression: "showNewAddress"
+            }
+          ],
+          staticClass: "card-footer"
+        },
+        [
+          _c("input", {
+            attrs: { id: "addressIdInput", type: "hidden", name: "address_id" }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "address_1" } }, [
+              _vm._v("Address Line 1")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "address_2" } }, [
-                _vm._v("Address Line 2")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { id: "address2Input", type: "text", name: "address_2" }
-              }),
-              _vm._v(" "),
-              _c("small", { staticClass: "form-text text-danger" }, [
-                _vm._v(_vm._s(_vm.errors.address_2[0]))
-              ])
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { id: "address1Input", type: "text", name: "address_1" }
+            }),
+            _vm._v(" "),
+            _c("small", { staticClass: "form-text text-danger" }, [
+              _vm._v(_vm._s(_vm.errors.address_1[0]))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "address_2" } }, [
+              _vm._v("Address Line 2")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "suburb" } }, [_vm._v("Suburb")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "suburbInput",
-                  type: "text",
-                  name: "suburb",
-                  placeholder: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("small", { staticClass: "form-text text-danger" }, [
-                _vm._v(_vm._s(_vm.errors.suburb[0]))
-              ])
-            ]),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { id: "address2Input", type: "text", name: "address_2" }
+            }),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "state" } }, [_vm._v("State")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "stateInput",
-                  type: "text",
-                  name: "state",
-                  placeholder: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("small", { staticClass: "form-text text-danger" }, [
-                _vm._v(_vm._s(_vm.errors.state[0]))
-              ])
-            ]),
+            _c("small", { staticClass: "form-text text-danger" }, [
+              _vm._v(_vm._s(_vm.errors.address_2[0]))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "suburb" } }, [_vm._v("Suburb")]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "postcode" } }, [_vm._v("Postcode")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "postcodeInput",
-                  type: "text",
-                  name: "postcode",
-                  placeholder: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("small", { staticClass: "form-text text-danger" }, [
-                _vm._v(_vm._s(_vm.errors.postcode[0]))
-              ])
-            ]),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                id: "suburbInput",
+                type: "text",
+                name: "suburb",
+                placeholder: ""
+              }
+            }),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "country" } }, [_vm._v("Country")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "countryInput",
-                  type: "text",
-                  name: "country",
-                  placeholder: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("small", { staticClass: "form-text text-danger" }, [
-                _vm._v(_vm._s(_vm.errors.country[0]))
-              ])
-            ]),
+            _c("small", { staticClass: "form-text text-danger" }, [
+              _vm._v(_vm._s(_vm.errors.suburb[0]))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "state" } }, [_vm._v("State")]),
             _vm._v(" "),
-            !_vm.loading
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-outline-dark",
-                    on: { click: _vm.saveAddress }
-                  },
-                  [_vm._v("Save")]
-                )
-              : _vm._e(),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                id: "stateInput",
+                type: "text",
+                name: "state",
+                placeholder: ""
+              }
+            }),
             _vm._v(" "),
-            _vm.loading
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-outline-dark",
-                    attrs: { disabled: "" }
-                  },
-                  [_vm._v("Save")]
-                )
-              : _vm._e(),
+            _c("small", { staticClass: "form-text text-danger" }, [
+              _vm._v(_vm._s(_vm.errors.state[0]))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "postcode" } }, [_vm._v("Postcode")]),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-dark",
-                on: { click: _vm.closeNewAddress }
-              },
-              [_vm._v("Cancel")]
-            )
-          ])
-        : _vm._e(),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                id: "postcodeInput",
+                type: "text",
+                name: "postcode",
+                placeholder: ""
+              }
+            }),
+            _vm._v(" "),
+            _c("small", { staticClass: "form-text text-danger" }, [
+              _vm._v(_vm._s(_vm.errors.postcode[0]))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "country" } }, [_vm._v("Country")]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                id: "countryInput",
+                type: "text",
+                name: "country",
+                placeholder: ""
+              }
+            }),
+            _vm._v(" "),
+            _c("small", { staticClass: "form-text text-danger" }, [
+              _vm._v(_vm._s(_vm.errors.country[0]))
+            ])
+          ]),
+          _vm._v(" "),
+          !_vm.loading
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-dark",
+                  on: { click: _vm.saveAddress }
+                },
+                [_vm._v("Save")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.loading
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-dark",
+                  attrs: { disabled: "" }
+                },
+                [_vm._v("Save")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-dark",
+              on: { click: _vm.closeNewAddress }
+            },
+            [_vm._v("Cancel")]
+          )
+        ]
+      ),
       _vm._v(" "),
       _vm.flash.message
         ? _c("flash-notice", {

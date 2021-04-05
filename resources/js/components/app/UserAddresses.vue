@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="card-header">
-            Your addresses
+            Your Addresses
         </div>
 
         <div class="card-body">
@@ -23,7 +23,10 @@
             </div>
         </div>
 
-        <div class="card-footer" v-if="showNewAddress">
+        <div class="card-footer" v-show="showNewAddress">
+            <!-- If we're creating a new address, don't specify ID -->
+            <input id="addressIdInput" type="hidden" name="address_id">
+
             <div class="form-group">
                 <label for="address_1">Address Line 1</label>
                 <input id="address1Input" type="text" class="form-control" name="address_1">
@@ -66,8 +69,10 @@
                 <small class="form-text text-danger">{{ errors.country[0] }}</small>
             </div>
 
+
             <button v-if="!loading" class="btn btn-outline-dark" v-on:click="saveAddress">Save</button>
             <button v-if="loading" class="btn btn-outline-dark" disabled>Save</button>
+
             <button class="btn btn-outline-dark" v-on:click="closeNewAddress">Cancel</button>
         </div>
 
@@ -82,12 +87,25 @@ export default {
     },
     methods: {
         newAddress: function() {
-            this.showNewAddress = true;
+            if (!this.showNewAddress) {
+                this.showNewAddress = true;
+            } else {
+                this.showNewAddress = false;
+            }
+
+            document.getElementById('addressIdInput').value = null;
+            document.getElementById('address1Input').value = null;
+            document.getElementById('address2Input').value = null;
+            document.getElementById('suburbInput').value = null;
+            document.getElementById('stateInput').value = null;
+            document.getElementById('postcodeInput').value = null;
+            document.getElementById('countryInput').value = null;
         },
         closeNewAddress: function() {
             this.showNewAddress = false;
         },
         saveAddress: function() {
+            var address_id = document.getElementById('addressIdInput').value;
             var address_1 = document.getElementById('address1Input').value;
             var address_2 = document.getElementById('address2Input').value;
             var suburb = document.getElementById('suburbInput').value;
@@ -98,6 +116,7 @@ export default {
             this.loading = true;
 
             axios.post('/address', {
+                address_id: address_id ? address_id : null,
                 address_1: address_1 ? address_1 : null,
                 address_2: address_2 ? address_2 : null,
                 suburb: suburb ? suburb : null,
@@ -127,7 +146,7 @@ export default {
                 // If we're getting validation errors
                 if (error.response.status === 422) {
                     this.errors = Object.assign(this.errors, error.response.data.errors);
-                    this.flashMessage("Your details have validation errors", 'danger');
+                    this.flashMessage("Your address has validation errors", 'danger');
                 }
 
                 // If our saving failed
@@ -150,7 +169,19 @@ export default {
             });
         },
         editAddress: function(id) {
-            console.log(id);
+            this.addresses.map((address) => {
+                if (address.id === id) {
+                    document.getElementById('addressIdInput').value = id;
+                    document.getElementById('address1Input').value = address.address_1;
+                    document.getElementById('address2Input').value = address.address_2;
+                    document.getElementById('suburbInput').value  = address.suburb;
+                    document.getElementById('stateInput').value = address.state;
+                    document.getElementById('postcodeInput').value = address.postcode;
+                    document.getElementById('countryInput').value = address.country;
+                    
+                    this.showNewAddress = true;
+                }
+            })
         },
         flashMessage: function(message, type) {
             this.flash.key += 1;
