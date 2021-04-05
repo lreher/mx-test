@@ -37,9 +37,10 @@ export default {
 }
 
 @keyframes fadeInAndOut {
-    0%   { opacity:0; }
-    25%  { opacity:1; }
-    75% { opacity:1; }
-    100% { opacity:0; }
+    0%   { opacity:0; z-index: 1;}
+    25%  { opacity:1; z-index: 1;}
+    75% { opacity:1;  z-index: 1;}
+    99% { opacity:0;  z-index: 1;}
+    100% { opacity:0; z-index: -1; }
 }
 </style>

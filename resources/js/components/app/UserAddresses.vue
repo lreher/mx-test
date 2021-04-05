@@ -87,12 +87,8 @@ export default {
     },
     methods: {
         newAddress: function() {
-            if (!this.showNewAddress) {
-                this.showNewAddress = true;
-            } else {
-                this.showNewAddress = false;
-            }
-
+            this.showNewAddress = true;
+        
             document.getElementById('addressIdInput').value = null;
             document.getElementById('address1Input').value = null;
             document.getElementById('address2Input').value = null;

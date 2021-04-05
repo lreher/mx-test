@@ -1991,12 +1991,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     newAddress: function newAddress() {
-      if (!this.showNewAddress) {
-        this.showNewAddress = true;
-      } else {
-        this.showNewAddress = false;
-      }
-
+      this.showNewAddress = true;
       document.getElementById('addressIdInput').value = null;
       document.getElementById('address1Input').value = null;
       document.getElementById('address2Input').value = null;
@@ -2506,7 +2501,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#flashNotice[data-v-7e1e05cd] {\n    -webkit-animation: fadeInAndOut-data-v-7e1e05cd 4s;\n    animation: fadeInAndOut-data-v-7e1e05cd 4s;\n\n    animation-fill-mode: forwards;\n    -o-animation-fill-mode: forwards;\n    -moz-animation-fill-mode: forwards;\n    -webkit-animation-fill-mode: forwards;\n\n    position: fixed;\n    bottom:0;\n    right:0;\n    left: 0;\n}\n@-webkit-keyframes fadeInAndOut-data-v-7e1e05cd {\n0%   { opacity:0;\n}\n25%  { opacity:1;\n}\n75% { opacity:1;\n}\n100% { opacity:0;\n}\n}\n@keyframes fadeInAndOut-data-v-7e1e05cd {\n0%   { opacity:0;\n}\n25%  { opacity:1;\n}\n75% { opacity:1;\n}\n100% { opacity:0;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#flashNotice[data-v-7e1e05cd] {\n    -webkit-animation: fadeInAndOut-data-v-7e1e05cd 4s;\n    animation: fadeInAndOut-data-v-7e1e05cd 4s;\n\n    animation-fill-mode: forwards;\n    -o-animation-fill-mode: forwards;\n    -moz-animation-fill-mode: forwards;\n    -webkit-animation-fill-mode: forwards;\n\n    position: fixed;\n    bottom:0;\n    right:0;\n    left: 0;\n}\n@-webkit-keyframes fadeInAndOut-data-v-7e1e05cd {\n0%   { opacity:0; z-index: 1;}\n25%  { opacity:1; z-index: 1;}\n75% { opacity:1;  z-index: 1;}\n99% { opacity:0;  z-index: 1;}\n100% { opacity:0; z-index: -1;\n}\n}\n@keyframes fadeInAndOut-data-v-7e1e05cd {\n0%   { opacity:0; z-index: 1;}\n25%  { opacity:1; z-index: 1;}\n75% { opacity:1;  z-index: 1;}\n99% { opacity:0;  z-index: 1;}\n100% { opacity:0; z-index: -1;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
