@@ -8,8 +8,8 @@
                 <app-user-details :user_model="user_model"></app-user-details>  
             </div>
 
-             <div class="col-6">
-                <app-user-addresses :addresses="[]"></app-user-addresses>  
+             <div class="col-6" v-if="user.user_addresses">
+                <app-user-addresses :addresses_prop="user.user_addresses"></app-user-addresses>  
             </div>
         </div>
     </div>
@@ -23,7 +23,8 @@ export default {
     data: function () {
         return {
             user: {
-                username: null
+                username: null,
+                user_addresses: null
             }
         }
     },

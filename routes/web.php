@@ -13,6 +13,9 @@ Route::post('register', 'Auth\RegistrationController@register')->name('register.
 Route::middleware([ 'auth' ])->group(function() {
     Route::get('/', 'HomeController@showHome')->name('home');
 
-    // User s
     Route::post('/user_details', 'HomeController@saveUserDetails')->name('user_details.do');
+
+
+    Route::post('/address', 'HomeController@saveAddress')->name('save_address.do');
+    Route::delete('/address/{addressId}', 'HomeController@deleteAddress')->name('delete_address.do');
 });

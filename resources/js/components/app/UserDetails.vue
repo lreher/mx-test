@@ -67,6 +67,12 @@ export default {
             var lastName = document.getElementById('lastName').value;
             var phoneNumber = document.getElementById('phoneNumber').value;
 
+            this.user = {
+                first_name: firstName,
+                last_name: lastName,
+                phone_number: phoneNumber
+            }
+
             this.loading = true;
 
             axios.post('/user_details', {
@@ -92,6 +98,7 @@ export default {
                 // If we're getting validation errors
                 if (error.response.status === 422) {
                     this.errors = Object.assign(this.errors, error.response.data.errors);
+                    this.flashMessage("Your details have validation errors", 'danger');
                 }
 
                 // If our saving failed
