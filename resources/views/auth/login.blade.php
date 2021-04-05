@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <login></login>
+
+    {{ Session::get('message') }}
+
+    <login csrf="{{ csrf_token() }}"></login>
+
+    {{ $errors }}
 @endsection

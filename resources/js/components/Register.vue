@@ -4,7 +4,7 @@
             <h1>Register</h1>
         </div>
 
-        <form method="POST" action="/register" class="login" >
+        <form method="POST" action="/register">
             <input type="hidden" name="_token" :value="csrf">
 
             <label for="username">Username:</label>
@@ -17,7 +17,7 @@
             <input id="passwordInput" type="password" name="password"><br><br>
 
             <label for="confirm_password">Confirm Password:</label>
-            <input id="confirmPasswordInput" type="password" name="confirm_password"><br><br>
+            <input id="confirmPasswordInput" type="password" name="password_confirmation"><br><br>
 
             <label for="showPassword">Show password?</label>
             <input type="checkbox" name="showPassword" @change="showPassword($event)">

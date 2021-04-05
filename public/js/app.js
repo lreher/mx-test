@@ -1851,12 +1851,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  mounted: function mounted() {
+    this.user = JSON.parse(this.user_model);
+  },
   data: function data() {
     return {
-      person: "Kat"
+      user: {
+        username: null
+      }
     };
-  }
+  },
+  props: ['user_model']
 });
 
 /***/ }),
@@ -1895,12 +1907,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {
-      showPassword: false
-    };
-  }
+    return {};
+  },
+  props: ['csrf']
 });
 
 /***/ }),
@@ -2025,7 +2038,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-332fccf4] {\n  color: blue;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-332fccf4] {\n    color: grey;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2871,9 +2884,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("h1", [_vm._v("Hello " + _vm._s(_vm.person))])])
+  return _c("div", [
+    _c("div", [_c("h1", [_vm._v("Hello " + _vm._s(_vm.user.username))])]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("a", { attrs: { href: "/logout" } }, [_vm._v("Logout")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -2896,37 +2922,48 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("form", { attrs: { form: "", method: "POST", action: "/login" } }, [
+      _c("input", {
+        attrs: { type: "hidden", name: "_token" },
+        domProps: { value: _vm.csrf }
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "login" } }, [_vm._v("Username/Email:")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", name: "login" } }),
+      _c("br"),
+      _c("br"),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "password" } }, [_vm._v("Password:")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "password", name: "password" } }),
+      _c("br"),
+      _c("br"),
+      _vm._v(" "),
+      _c("button", { attrs: { type: "submit" } }, [_vm._v("Login")])
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", [_c("h1", [_vm._v("Login")])]),
-      _vm._v(" "),
-      _c("form", { staticClass: "login" }, [
-        _c("label", { attrs: { for: "email" } }, [_vm._v("Email:")]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "text", name: "email" } }),
-        _c("br"),
-        _c("br"),
-        _vm._v(" "),
-        _c("label", { attrs: { for: "password" } }, [_vm._v("Password:")]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "text", name: "password" } }),
-        _c("br"),
-        _c("br"),
-        _vm._v(" "),
-        _c("button", [_vm._v("Login")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "register" }, [
-        _c("p", [
-          _vm._v("Don't have an account? "),
-          _c("a", { attrs: { href: "/register" } }, [_vm._v("Register")])
-        ])
+    return _c("div", [_c("h1", [_vm._v("Login")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "register" }, [
+      _c("p", [
+        _vm._v("Don't have an account? "),
+        _c("a", { attrs: { href: "/register" } }, [_vm._v("Register")])
       ])
     ])
   }
@@ -2956,65 +2993,61 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _c(
-      "form",
-      { staticClass: "login", attrs: { method: "POST", action: "/register" } },
-      [
-        _c("input", {
-          attrs: { type: "hidden", name: "_token" },
-          domProps: { value: _vm.csrf }
-        }),
-        _vm._v(" "),
-        _c("label", { attrs: { for: "username" } }, [_vm._v("Username:")]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "text", name: "username" } }),
-        _c("br"),
-        _c("br"),
-        _vm._v(" "),
-        _c("label", { attrs: { for: "email" } }, [_vm._v("Email:")]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "text", name: "email" } }),
-        _c("br"),
-        _c("br"),
-        _vm._v(" "),
-        _c("label", { attrs: { for: "password" } }, [_vm._v("Password:")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { id: "passwordInput", type: "password", name: "password" }
-        }),
-        _c("br"),
-        _c("br"),
-        _vm._v(" "),
-        _c("label", { attrs: { for: "confirm_password" } }, [
-          _vm._v("Confirm Password:")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: {
-            id: "confirmPasswordInput",
-            type: "password",
-            name: "confirm_password"
+    _c("form", { attrs: { method: "POST", action: "/register" } }, [
+      _c("input", {
+        attrs: { type: "hidden", name: "_token" },
+        domProps: { value: _vm.csrf }
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "username" } }, [_vm._v("Username:")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", name: "username" } }),
+      _c("br"),
+      _c("br"),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "email" } }, [_vm._v("Email:")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", name: "email" } }),
+      _c("br"),
+      _c("br"),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "password" } }, [_vm._v("Password:")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { id: "passwordInput", type: "password", name: "password" }
+      }),
+      _c("br"),
+      _c("br"),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "confirm_password" } }, [
+        _vm._v("Confirm Password:")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: {
+          id: "confirmPasswordInput",
+          type: "password",
+          name: "password_confirmation"
+        }
+      }),
+      _c("br"),
+      _c("br"),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "showPassword" } }, [
+        _vm._v("Show password?")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "checkbox", name: "showPassword" },
+        on: {
+          change: function($event) {
+            return _vm.showPassword($event)
           }
-        }),
-        _c("br"),
-        _c("br"),
-        _vm._v(" "),
-        _c("label", { attrs: { for: "showPassword" } }, [
-          _vm._v("Show password?")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "showPassword" },
-          on: {
-            change: function($event) {
-              return _vm.showPassword($event)
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("button", { attrs: { type: "submit" } }, [_vm._v("Register")])
-      ]
-    ),
+        }
+      }),
+      _vm._v(" "),
+      _c("button", { attrs: { type: "submit" } }, [_vm._v("Register")])
+    ]),
     _vm._v(" "),
     _vm._m(1)
   ])

@@ -17,7 +17,8 @@ class RegistrationRequest extends BaseFormRequest
     {
         $rules = [
             'username' => [
-                'required'
+                'required',
+                'unique:users'
             ],
             'email' => [
                 'required',
@@ -40,6 +41,7 @@ class RegistrationRequest extends BaseFormRequest
     {
         return [
             'username.required' => "You must enter an username",
+            'username.unique' => "This username is already being used",
             'email.required' => "You must enter an email address",
             'email.email' => "Email address must be valid",
             'email.unique' => "This email address is already being used",

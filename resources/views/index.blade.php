@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-
-    
-    <app></app>
+    <app user_model="{{$user}}"></app>
 @endsection

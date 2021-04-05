@@ -4,14 +4,16 @@
             <h1>Login</h1>
         </div>
 
-        <form class="login">
-            <label for="email">Email:</label>
-            <input type="text" name="email"><br><br>
+        <form form method="POST" action="/login">
+            <input type="hidden" name="_token" :value="csrf">
+
+            <label for="login">Username/Email:</label>
+            <input type="text" name="login"><br><br>
 
             <label for="password">Password:</label>
-            <input type="text" name="password"><br><br>
+            <input type="password" name="password"><br><br>
 
-            <button>Login</button>
+            <button type="submit">Login</button>
         </form>
 
         <div class="register">
@@ -23,11 +25,11 @@
 
 <script>
 export default {
-  data: function () {
-    return {
-        showPassword: false
-    }
-  }
+    data: function () {
+        return {
+        }
+    },
+    props: ['csrf']
 }
 </script>
 
